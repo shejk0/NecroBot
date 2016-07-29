@@ -39,11 +39,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     session.Translation.GetTranslation(TranslationString.FarmPokestopsOutsideRadius, distanceFromStart),
                     LogLevel.Warning);
 
-<<<<<<< HEAD
-                await Task.Delay(500);
-=======
                 await Task.Delay(1000, cancellationToken);
->>>>>>> refs/remotes/NecronomiconCoding/master
 
                 await session.Navigation.HumanLikeWalking(
                     new GeoCoordinate(session.Settings.DefaultLatitude, session.Settings.DefaultLongitude),
@@ -152,11 +148,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     }
                 } while (fortTry < retryNumber - zeroCheck); //Stop trying if softban is cleaned earlier or if 40 times fort looting failed.
 
-<<<<<<< HEAD
-                await Task.Delay(500);
-=======
                 await Task.Delay(1000, cancellationToken);
->>>>>>> refs/remotes/NecronomiconCoding/master
 
                 await eggWalker.ApplyDistance(distance, cancellationToken);
 

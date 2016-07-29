@@ -69,11 +69,7 @@ namespace PoGo.NecroBot.Logic.State
                 {
                     session.EventDispatcher.Send(new ErrorEvent { Message = session.Translation.GetTranslation(TranslationString.GoogleTwoFactorAuth) });
                     session.EventDispatcher.Send(new ErrorEvent { Message = session.Translation.GetTranslation(TranslationString.GoogleTwoFactorAuthExplanation) });
-<<<<<<< HEAD
-                    await Task.Delay(3000);
-=======
                     await Task.Delay(7000, cancellationToken);
->>>>>>> refs/remotes/NecronomiconCoding/master
                     try
                     {
                         System.Diagnostics.Process.Start("https://security.google.com/settings/security/apppasswords");

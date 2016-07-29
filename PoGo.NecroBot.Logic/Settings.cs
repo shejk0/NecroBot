@@ -50,7 +50,7 @@ namespace PoGo.NecroBot.CLI
                     Save(_filePath);
                 }
             }
-            catch(Newtonsoft.Json.JsonReaderException exception)
+            catch (Newtonsoft.Json.JsonReaderException exception)
             {
                 if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("PtcUsername"))
                     Logger.Write("JSON Exception: You need to properly configure your PtcUsername using quotations.", LogLevel.Error);
@@ -124,29 +124,19 @@ namespace PoGo.NecroBot.CLI
         public bool KeepPokemonsThatCanEvolve = true;
         public bool PrioritizeIvOverCp = false;
         public bool RenameAboveIv = true;
-<<<<<<< HEAD
-        public string RenameTemplate = "{0} - {1}";
-=======
-        public string RenameTemplate = "{1}_{0}";
->>>>>>> refs/remotes/NecronomiconCoding/master
+        public string RenameTemplate = "{0}-{1}";
         public bool TransferDuplicatePokemon = true;
         public string TranslationLanguageCode = "en";
         public bool UsePokemonToNotCatchFilter = false;
         public int WebSocketPort = 14251;
-<<<<<<< HEAD
         public bool StartupWelcomeDelay = false;
         public bool SnipeAtPokestops = true;
-=======
-        public bool StartupWelcomeDelay = true;
-        public bool SnipeAtPokestops = false;
         public int MinPokeballsToSnipe = 20;
->>>>>>> refs/remotes/NecronomiconCoding/master
         public string SnipeLocationServer = "localhost";
         public int SnipeLocationServerPort = 16969;
         public bool UseSnipeLocationServer = false;
         public bool UseTransferIVForSnipe = false;
         public int MinDelayBetweenSnipes = 20000;
-
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
@@ -336,12 +326,12 @@ namespace PoGo.NecroBot.CLI
                 settings.PokemonToSnipe = Default.PokemonToSnipe;
             }
 
-            if(settings.RenameTemplate == null)
+            if (settings.RenameTemplate == null)
             {
                 settings.RenameTemplate = Default.RenameTemplate;
             }
 
-            if(settings.SnipeLocationServer == null)
+            if (settings.SnipeLocationServer == null)
             {
                 settings.SnipeLocationServer = Default.SnipeLocationServer;
             }
@@ -553,7 +543,7 @@ namespace PoGo.NecroBot.CLI
         public SnipeSettings PokemonToSnipe => _settings.PokemonToSnipe;
         public string SnipeLocationServer => _settings.SnipeLocationServer;
         public int SnipeLocationServerPort => _settings.SnipeLocationServerPort;
-        public bool UseSnipeLocationServer=> _settings.UseSnipeLocationServer;
+        public bool UseSnipeLocationServer => _settings.UseSnipeLocationServer;
         public bool UseTransferIVForSnipe => _settings.UseTransferIVForSnipe;
         public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;
     }
