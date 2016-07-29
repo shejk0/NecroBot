@@ -174,7 +174,7 @@ namespace PoGo.NecroBot.CLI
             PokemonId.Charmander,
             PokemonId.Squirtle,
             PokemonId.Caterpie,
-            PokemonGo.Dratini,
+            PokemonId.Dratini,
             PokemonId.Metapod,
             PokemonId.Weedle,
             PokemonId.Kakuna,
