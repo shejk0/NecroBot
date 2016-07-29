@@ -221,7 +221,6 @@ namespace PoGo.NecroBot.CLI
             PokemonId.Gastly,
             PokemonId.Haunter,
             PokemonId.Drowzee,
-            PokemonId.Hypno,
             PokemonId.Krabby,
             PokemonId.Voltorb,
             PokemonId.Exeggcute,
