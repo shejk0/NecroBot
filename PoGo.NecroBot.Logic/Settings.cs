@@ -10,7 +10,7 @@ using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Enums;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
-
+using PoGo.NecroBot.Logic.Logging;
 #endregion
 
 namespace PoGo.NecroBot.CLI
@@ -31,21 +31,37 @@ namespace PoGo.NecroBot.CLI
 
         public void Load(string path)
         {
-            _filePath = path;
-
-            if (File.Exists(_filePath))
+            try
             {
-                //if the file exists, load the settings
-                var input = File.ReadAllText(_filePath);
+                _filePath = path;
 
-                var settings = new JsonSerializerSettings();
-                settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+                if (File.Exists(_filePath))
+                {
+                    //if the file exists, load the settings
+                    var input = File.ReadAllText(_filePath);
 
-                JsonConvert.PopulateObject(input, this, settings);
+                    var settings = new JsonSerializerSettings();
+                    settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+
+                    JsonConvert.PopulateObject(input, this, settings);
+                }
+                else
+                {
+                    Save(_filePath);
+                }
             }
-            else
+            catch(Newtonsoft.Json.JsonReaderException exception)
             {
-                Save(_filePath);
+                if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("PtcUsername"))
+                    Logger.Write("JSON Exception: You need to properly configure your PtcUsername using quotations.", LogLevel.Error);
+                else if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("PtcPassword"))
+                    Logger.Write("JSON Exception: You need to properly configure your PtcPassword using quotations.", LogLevel.Error);
+                else if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("GoogleUsername"))
+                    Logger.Write("JSON Exception: You need to properly configure your GoogleUsername using quotations.", LogLevel.Error);
+                else if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("GooglePassword"))
+                    Logger.Write("JSON Exception: You need to properly configure your GooglePassword using quotations.", LogLevel.Error);
+                else
+                    Logger.Write("JSON Exception: " + exception.Message, LogLevel.Error);
             }
         }
 
@@ -108,13 +124,23 @@ namespace PoGo.NecroBot.CLI
         public bool KeepPokemonsThatCanEvolve = true;
         public bool PrioritizeIvOverCp = false;
         public bool RenameAboveIv = true;
+<<<<<<< HEAD
         public string RenameTemplate = "{0} - {1}";
+=======
+        public string RenameTemplate = "{1}_{0}";
+>>>>>>> refs/remotes/NecronomiconCoding/master
         public bool TransferDuplicatePokemon = true;
         public string TranslationLanguageCode = "en";
         public bool UsePokemonToNotCatchFilter = false;
         public int WebSocketPort = 14251;
+<<<<<<< HEAD
         public bool StartupWelcomeDelay = false;
         public bool SnipeAtPokestops = true;
+=======
+        public bool StartupWelcomeDelay = true;
+        public bool SnipeAtPokestops = false;
+        public int MinPokeballsToSnipe = 20;
+>>>>>>> refs/remotes/NecronomiconCoding/master
         public string SnipeLocationServer = "localhost";
         public int SnipeLocationServerPort = 16969;
         public bool UseSnipeLocationServer = false;
@@ -277,15 +303,23 @@ namespace PoGo.NecroBot.CLI
 
             if (File.Exists(configFile))
             {
-                //if the file exists, load the settings
-                var input = File.ReadAllText(configFile);
+                try
+                {
+                    //if the file exists, load the settings
+                    var input = File.ReadAllText(configFile);
 
-                var jsonSettings = new JsonSerializerSettings();
-                jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
-                jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
-                jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
+                    var jsonSettings = new JsonSerializerSettings();
+                    jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+                    jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
+                    jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
 
-                settings = JsonConvert.DeserializeObject<GlobalSettings>(input, jsonSettings);
+                    settings = JsonConvert.DeserializeObject<GlobalSettings>(input, jsonSettings);
+                }
+                catch (Newtonsoft.Json.JsonReaderException exception)
+                {
+                    Logger.Write("JSON Exception: " + exception.Message, LogLevel.Error);
+                    return null;
+                }
             }
             else
             {
@@ -515,6 +549,7 @@ namespace PoGo.NecroBot.CLI
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
+        public int MinPokeballsToSnipe => _settings.MinPokeballsToSnipe;
         public SnipeSettings PokemonToSnipe => _settings.PokemonToSnipe;
         public string SnipeLocationServer => _settings.SnipeLocationServer;
         public int SnipeLocationServerPort => _settings.SnipeLocationServerPort;
