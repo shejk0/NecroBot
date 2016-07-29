@@ -134,7 +134,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 attemptCounter++;
                 
-                DelayingUtils.Delay(session.LogicSettings.DelayBetweenPokemonCatch, 2000);
+                DelayingUtils.Delay(session.LogicSettings.DelayBetweenPokemonCatch, 200);
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }

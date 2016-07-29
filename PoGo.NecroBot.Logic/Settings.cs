@@ -85,35 +85,35 @@ namespace PoGo.NecroBot.CLI
         [JsonIgnore]
         public string GeneralConfigPath;
 
-        public bool AutoUpdate = true;
+        public bool AutoUpdate = false;
         public double DefaultAltitude = 10;
-        public double DefaultLatitude = 40.785091;
-        public double DefaultLongitude = -73.968285;
-        public int DelayBetweenPokemonCatch = 2000;
-        public int DelayBetweenPlayerActions = 5000;
+        public double DefaultLatitude = 35.6894875;
+        public double DefaultLongitude = 139.691706;
+        public int DelayBetweenPokemonCatch = 200;
+        public int DelayBetweenPlayerActions = 200;
         public float EvolveAboveIvValue = 90;
         public bool EvolveAllPokemonAboveIv = false;
         public bool EvolveAllPokemonWithEnoughCandy = true;
         public int UseLuckyEggsMinPokemonAmount = 30;
         public bool UseLuckyEggsWhileEvolving = false;
         public bool UseEggIncubators = true;
-        public bool DumpPokemonStats = false;
+        public bool DumpPokemonStats = true;
         public string GpxFile = "GPXPath.GPX";
         public bool UseGpxPathing = false;
-        public double WalkingSpeedInKilometerPerHour = 15.0;
-        public int MaxTravelDistanceInMeters = 1000;
-        public int KeepMinCp = 1250;
+        public double WalkingSpeedInKilometerPerHour = 1000.0;
+        public int MaxTravelDistanceInMeters = 3500;
+        public int KeepMinCp = 2000;
         public int KeepMinDuplicatePokemon = 1;
-        public float KeepMinIvPercentage = 95;
-        public bool KeepPokemonsThatCanEvolve = false;
-        public bool PrioritizeIvOverCp = true;
+        public float KeepMinIvPercentage = 96;
+        public bool KeepPokemonsThatCanEvolve = true;
+        public bool PrioritizeIvOverCp = false;
         public bool RenameAboveIv = true;
-        public string RenameTemplate = "{0}_{1}";
+        public string RenameTemplate = "{0} - {1}";
         public bool TransferDuplicatePokemon = true;
         public string TranslationLanguageCode = "en";
         public bool UsePokemonToNotCatchFilter = false;
         public int WebSocketPort = 14251;
-        public bool StartupWelcomeDelay = true;
+        public bool StartupWelcomeDelay = false;
         public bool SnipeAtPokestops = true;
         public string SnipeLocationServer = "localhost";
         public int SnipeLocationServerPort = 16969;
@@ -121,19 +121,20 @@ namespace PoGo.NecroBot.CLI
         public bool UseTransferIVForSnipe = false;
         public int MinDelayBetweenSnipes = 20000;
 
+
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
             new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPokeBall, 25),
-            new KeyValuePair<ItemId, int>(ItemId.ItemGreatBall, 50),
+            new KeyValuePair<ItemId, int>(ItemId.ItemPokeBall, 40),
+            new KeyValuePair<ItemId, int>(ItemId.ItemGreatBall, 100),
             new KeyValuePair<ItemId, int>(ItemId.ItemUltraBall, 100),
             new KeyValuePair<ItemId, int>(ItemId.ItemMasterBall, 100),
             new KeyValuePair<ItemId, int>(ItemId.ItemPotion, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemSuperPotion, 10),
-            new KeyValuePair<ItemId, int>(ItemId.ItemHyperPotion, 40),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMaxPotion, 75),
-            new KeyValuePair<ItemId, int>(ItemId.ItemRevive, 25),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMaxRevive, 50),
+            new KeyValuePair<ItemId, int>(ItemId.ItemSuperPotion, 0),
+            new KeyValuePair<ItemId, int>(ItemId.ItemHyperPotion, 0),
+            new KeyValuePair<ItemId, int>(ItemId.ItemMaxPotion, 25),
+            new KeyValuePair<ItemId, int>(ItemId.ItemRevive, 0),
+            new KeyValuePair<ItemId, int>(ItemId.ItemMaxRevive, 25),
             new KeyValuePair<ItemId, int>(ItemId.ItemLuckyEgg, 200),
             new KeyValuePair<ItemId, int>(ItemId.ItemIncenseOrdinary, 100),
             new KeyValuePair<ItemId, int>(ItemId.ItemIncenseSpicy, 100),
@@ -143,7 +144,7 @@ namespace PoGo.NecroBot.CLI
             new KeyValuePair<ItemId, int>(ItemId.ItemXAttack, 100),
             new KeyValuePair<ItemId, int>(ItemId.ItemXDefense, 100),
             new KeyValuePair<ItemId, int>(ItemId.ItemXMiracle, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemRazzBerry, 50),
+            new KeyValuePair<ItemId, int>(ItemId.ItemRazzBerry, 60),
             new KeyValuePair<ItemId, int>(ItemId.ItemBlukBerry, 10),
             new KeyValuePair<ItemId, int>(ItemId.ItemNanabBerry, 10),
             new KeyValuePair<ItemId, int>(ItemId.ItemWeparBerry, 30),
@@ -157,99 +158,93 @@ namespace PoGo.NecroBot.CLI
 
         public List<PokemonId> PokemonsNotToTransfer = new List<PokemonId>
         {
-            PokemonId.Aerodactyl,
-            PokemonId.Venusaur,
-            PokemonId.Charizard,
-            PokemonId.Blastoise,
-            PokemonId.Nidoqueen,
-            PokemonId.Nidoking,
-            PokemonId.Clefable,
-            PokemonId.Vileplume,
-            PokemonId.Arcanine,
-            PokemonId.Poliwrath,
-            PokemonId.Machamp,
-            PokemonId.Victreebel,
-            PokemonId.Golem,
-            PokemonId.Slowbro,
-            PokemonId.Farfetchd,
-            PokemonId.Muk,
-            PokemonId.Exeggutor,
-            PokemonId.Lickitung,
-            PokemonId.Chansey,
-            PokemonId.Kangaskhan,
-            PokemonId.MrMime,
-            PokemonId.Gyarados,
             PokemonId.Lapras,
             PokemonId.Ditto,
-            PokemonId.Vaporeon,
-            PokemonId.Jolteon,
-            PokemonId.Flareon,
-            PokemonId.Porygon,
-            PokemonId.Snorlax,
             PokemonId.Articuno,
             PokemonId.Zapdos,
             PokemonId.Moltres,
             PokemonId.Dragonite,
             PokemonId.Mewtwo,
             PokemonId.Mew
-             //PokemonId.Golduck,
         };
 
         public List<PokemonId> PokemonsToEvolve = new List<PokemonId>
         {
-            //12 candies
+            PokemonId.Bulbasaur,
+            PokemonId.Charmander,
+            PokemonId.Squirtle,
             PokemonId.Caterpie,
+            PokemonId.Metapod,
             PokemonId.Weedle,
+            PokemonId.Kakuna,
             PokemonId.Pidgey,
-            //25 candies
+            PokemonId.Pidgeotto,
             PokemonId.Rattata,
-            //PokemonId.NidoranFemale,
-            //PokemonId.NidoranMale,
-            //PokemonId.Oddish,
-            //PokemonId.Poliwag,
-            //PokemonId.Abra,
-            //PokemonId.Machop,
-            //PokemonId.Bellsprout,
-            //PokemonId.Geodude,
-            //PokemonId.Gastly,
-            //PokemonId.Eevee,
-            //PokemonId.Dratini
-            //50 candies
             PokemonId.Spearow,
-            PokemonId.Zubat,
-            PokemonId.Doduo,
-            PokemonId.Goldeen,
-            PokemonId.Paras,
             PokemonId.Ekans,
-            PokemonId.Staryu,
+            PokemonId.Pikachu,
+            PokemonId.Sandshrew,
+            PokemonId.NidoranFemale,
+            PokemonId.Nidorina,
+            PokemonId.NidoranMale,
+            PokemonId.Nidorino,
+            PokemonId.Clefairy,
+            PokemonId.Vulpix,
+            PokemonId.Jigglypuff,
+            PokemonId.Zubat,
+            PokemonId.Oddish,
+            PokemonId.Gloom,
+            PokemonId.Paras,
+            PokemonId.Venonat,
+            PokemonId.Diglett,
+            PokemonId.Meowth,
             PokemonId.Psyduck,
+            PokemonId.Mankey,
+            PokemonId.Growlithe,
+            PokemonId.Poliwag,
+            PokemonId.Poliwhirl,
+            PokemonId.Kadabra,
+            PokemonId.Machop,
+            PokemonId.Machoke,
+            PokemonId.Bellsprout,
+            PokemonId.Weepinbell,
+            PokemonId.Tentacool,
+            PokemonId.Geodude,
+            PokemonId.Graveler,
+            PokemonId.Ponyta,
+            PokemonId.Slowpoke,
+            PokemonId.Magnemite,
+            PokemonId.Doduo,
+            PokemonId.Seel,
+            PokemonId.Grimer,
+            PokemonId.Shellder,
+            PokemonId.Gastly,
+            PokemonId.Haunter,
+            PokemonId.Drowzee,
+            PokemonId.Hypno,
             PokemonId.Krabby,
-            PokemonId.Venonat
+            PokemonId.Voltorb,
+            PokemonId.Exeggcute,
+            PokemonId.Hitmonlee,
+            PokemonId.Koffing,
+            PokemonId.Rhyhorn,
+            PokemonId.Horsea,
+            PokemonId.Goldeen,
+            PokemonId.Staryu,
+            PokemonId.Eevee,
+            PokemonId.Porygon,
+            PokemonId.Omanyte,
+            PokemonId.Kabuto
         };
 
         public List<PokemonId> PokemonsToIgnore = new List<PokemonId>
         {
-            PokemonId.Caterpie,
-            PokemonId.Weedle,
-            PokemonId.Pidgey,
-            PokemonId.Rattata,
-            PokemonId.Spearow,
-            PokemonId.Zubat,
             PokemonId.Doduo
         };
 
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter = new Dictionary<PokemonId, TransferFilter>
         {
-            {PokemonId.Pidgeotto, new TransferFilter(1500, 90, 1)},
-            {PokemonId.Fearow, new TransferFilter(1500, 90, 2)},
-            {PokemonId.Zubat, new TransferFilter(500, 90, 2)},
-            {PokemonId.Golbat, new TransferFilter(1500, 90, 2)},
-            {PokemonId.Pinsir, new TransferFilter(1500, 95, 2)},
-            {PokemonId.Golduck, new TransferFilter(1350, 95, 2)},
-            {PokemonId.Tentacruel, new TransferFilter(1350, 95, 2)},
-            {PokemonId.Starmie, new TransferFilter(1350, 95, 2)},
             {PokemonId.Eevee, new TransferFilter(750, 92, 2)},
-            {PokemonId.Gyarados, new TransferFilter(1200, 90, 5)},
             {PokemonId.Mew, new TransferFilter(0, 0, 10)}
         };
 
@@ -258,18 +253,16 @@ namespace PoGo.NecroBot.CLI
             Locations = new List<Location>
             {
                 new Location(38.55680748646112, -121.2383794784546), //Dratini Spot
-                new Location(-33.85901900, 151.21309800), //Magikarp Spot
-                new Location(47.5014969, -122.0959568), //Eevee Spot
                 new Location(51.5025343,-0.2055027) //Charmender Spot
 
             },
             Pokemon = new List<PokemonId>()
             {
+                PokemonId.Charmander,
                 PokemonId.Dratini,
-                PokemonId.Magikarp,
-                PokemonId.Eevee,
                 PokemonId.Snorlax,
                 PokemonId.Dragonair,
+                PokemonId.Dragonite
             }
         };
 
