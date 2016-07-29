@@ -87,7 +87,7 @@ namespace PoGo.NecroBot.CLI
 
         public bool AutoUpdate = false;
         public double DefaultAltitude = 10;
-        public double DefaultLatitude = 35.6894875;
+        public double DefaultLatitude = 35.6894875;  // Tokyo
         public double DefaultLongitude = 139.691706;
         public int DelayBetweenPokemonCatch = 200;
         public int DelayBetweenPlayerActions = 200;
@@ -174,6 +174,7 @@ namespace PoGo.NecroBot.CLI
             PokemonId.Charmander,
             PokemonId.Squirtle,
             PokemonId.Caterpie,
+            PokemonGo.Dratini,
             PokemonId.Metapod,
             PokemonId.Weedle,
             PokemonId.Kakuna,
@@ -258,8 +259,8 @@ namespace PoGo.NecroBot.CLI
             Pokemon = new List<PokemonId>()
             {
                 PokemonId.Charmander,
-                PokemonId.Dratini,
                 PokemonId.Snorlax,
+                PokemonId.Dratini,
                 PokemonId.Dragonair,
                 PokemonId.Dragonite
             }
